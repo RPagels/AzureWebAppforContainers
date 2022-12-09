@@ -8,7 +8,7 @@ EXPOSE 8080
 
 ENV ASPNETCORE_URLS "http://*:${PORT}"
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
 COPY ["AspNetWebApp.Web.csproj", "./"]
 RUN dotnet restore "AspNetWebApp.Web.csproj"
