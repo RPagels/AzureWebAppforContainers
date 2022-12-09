@@ -96,6 +96,8 @@ module keyvaultmod './main-1-KeyVault.bicep' = {
      containerAppName: containerAppName
      location: location
      containerregistryName: containerregistryName
+     containerregistryNameLoginServer: containerregistrymod.outputs.acrLoginServer
+     containerregistryNameCredentials: containerregistrymod.outputs.output_acr_pass
      containerImage: containerImage
      defaultTags: defaultTags
    }

@@ -2,6 +2,11 @@ param containerAppName string
 param containerAppEnvName string
 param containerAppLogAnalyticsName string
 param containerregistryName string
+param containerregistryNameLoginServer string
+
+@secure()
+param containerregistryNameCredentials string
+
 param defaultTags object
 
 // Specifies the docker container image to deploy.')
@@ -78,9 +83,9 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-06-01-preview' 
 }
 
 // Reference Existing resource
-resource existing_containerregistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
-  name: containerregistryName
-}
+// resource existing_containerregistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' existing = {
+//   name: containerregistryName
+// }
 
 // Create Container App
 // Note: revisionSuffix MUST BE unique per deployment.
@@ -107,15 +112,15 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
        }
       registries: [
         {
-          server: existing_containerregistry.properties.loginServer
+          server: containerregistryNameLoginServer //existing_containerregistry.properties.loginServer
           username: containerregistryName
-          passwordSecretRef: existing_containerregistry.name
+          passwordSecretRef: containerregistryName //existing_containerregistry.name
         }
       ]
       secrets: [
         {
-          name: existing_containerregistry.name
-          value: existing_containerregistry.listCredentials().passwords[0].value
+          name: containerregistryName //existing_containerregistry.name
+          value: containerregistryNameCredentials //existing_containerregistry.listCredentials().passwords[0].value
         }
       ]
    }
