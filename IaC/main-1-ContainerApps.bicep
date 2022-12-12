@@ -64,14 +64,13 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
     }
   })
 }
-//resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-06-01-preview' = {
-resource containerAppEnv 'Microsoft.Web/kubeEnvironments@2022-03-01' = { 
+
+//resource containerAppEnv 'Microsoft.Web/kubeEnvironments@2022-03-01' = { 
+  resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-06-01-preview' = {
   name: containerAppEnvName
   location: location
   tags: defaultTags
   properties: {
-    environmentType: 'managed'
-    internalLoadBalancerEnabled: false
     appLogsConfiguration: {
       destination: 'log-analytics'
       logAnalyticsConfiguration: {
@@ -133,6 +132,34 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
             cpu: json(cpuCore)
             memory: '${memorySize}Gi'
           }
+          probes: [
+            {
+              type: 'liveness'
+              httpGet: {
+              path: '/health'
+              port: 8080
+              }
+            initialDelaySeconds: 7
+            periodSeconds: 3
+            }
+            {
+              type: 'readiness'
+              httpGet: {
+              port: 8081
+              }
+            initialDelaySeconds: 10
+            periodSeconds: 3
+            }
+            {
+              type: 'startup'
+              httpGet: {
+              path: '/startup'
+              port: 8080
+              }
+            initialDelaySeconds: 3
+            periodSeconds: 3
+            }
+          ]
         }
       ]
       scale: {
