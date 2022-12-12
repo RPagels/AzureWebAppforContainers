@@ -92,9 +92,9 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
   name: containerAppName
   location: location
   tags: defaultTags
-  // identity: {
-  //   type: 'SystemAssigned'
-  // }
+  identity: {
+    type: 'SystemAssigned'
+  }
   properties: {
     managedEnvironmentId: containerAppEnv.id
     configuration: {
