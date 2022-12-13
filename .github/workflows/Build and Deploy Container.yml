@@ -189,7 +189,7 @@ jobs:
   # Stage: Deploy to Web App
   ################################################################              
   deploy_application_to_webapp:
-    name: Deploy to Web App
+    name: Deploy Image > Web App
     needs: [docker_build_push, deploy_infrastructure]
     environment:
       name: 'Development-WebApps'
@@ -236,7 +236,7 @@ jobs:
           az group lock create --lock-type CanNotDelete --name DontDeleteMe --resource-group ${{ env.Azure_Resource_GroupName }} --notes 'Prevent deletion of the resource group'
 
     # Logout of Azure and Clear the Cache
-    - name: Azure CLI script
+    - name: Logout of Azure and Clear the Cache
       uses: azure/CLI@v1
       with:
         inlineScript: |
@@ -248,7 +248,7 @@ jobs:
   # Stage: Deploy to Container App
   ################################################################            
   deploy_application_to_containerapp:
-    name: Deploy to Container App
+    name: Deploy Image > Container App
     needs: [docker_build_push, deploy_infrastructure]
     environment:
       name: 'Development-ContainerApps'
@@ -332,16 +332,26 @@ jobs:
     #         --ingress external \
     #         --env-vars CorsAllowedHosts=*
 
-    - name: Update Container App container image.
-      uses: Azure/CLI@v1
-      continue-on-error: false
+    # - name: Update Container App container image.
+    #   uses: Azure/CLI@v1
+    #   continue-on-error: false
+    #   with:
+    #     inlineScript: |
+    #       az config set extension.use_dynamic_install=yes_without_prompt
+    #       az containerapp update \
+    #         --name ${{ needs.deploy_infrastructure.outputs.output_containerAppName }} \
+    #         --resource-group ${{ env.Azure_Resource_GroupName }} \
+    #         --image ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }} \
+
+    # Deploy an existing container image to Container Apps
+    - name: Deploy existing container image to Container App
+      uses: azure/container-apps-deploy-action@v0
       with:
-        inlineScript: |
-          az config set extension.use_dynamic_install=yes_without_prompt
-          az containerapp update \
-            --name ${{ needs.deploy_infrastructure.outputs.output_containerAppName }} \
-            --resource-group ${{ env.Azure_Resource_GroupName }} \
-            --image ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }} \
+        acrName: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io
+        containerAppName: ${{ needs.deploy_infrastructure.outputs.output_containerAppName }}
+        resourceGroup: ${{ env.Azure_Resource_GroupName }}
+        imageToDeploy: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }}
+
 
     # Lock Resource Group
     - name: Ensure Resource Group is Locked
@@ -352,7 +362,7 @@ jobs:
           az group lock create --lock-type CanNotDelete --name DontDeleteMe --resource-group ${{ env.Azure_Resource_GroupName }} --notes 'Prevent deletion of the resource group'
 
     # Logout of Azure and Clear the Cache
-    - name: Azure CLI script
+    - name: Logout of Azure and Clear the Cache
       uses: azure/CLI@v1
       with:
         inlineScript: |
