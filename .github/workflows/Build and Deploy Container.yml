@@ -314,23 +314,41 @@ jobs:
 
     # Deploy container to Container App
     # --secrets ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}=${{ steps.GetKVACRValues.outputs.acruserpassword }} \
-    - name: Deploy to Container App
-      uses: Azure/CLI@v1
-      continue-on-error: false
-      with:
-        inlineScript: |
-          az config set extension.use_dynamic_install=yes_without_prompt
-          az containerapp create \
-            --name ${{ needs.deploy_infrastructure.outputs.output_containerAppName }} \
-            --resource-group ${{ env.Azure_Resource_GroupName }} \
-            --image ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }} \
-            --registry-server ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io \
-            --registry-username ${{ steps.GetKVACRValues.outputs.acrusername }} \
-            --registry-password ${{ steps.GetKVACRValues.outputs.acruserpassword }} \
-            --environment ${{ needs.deploy_infrastructure.outputs.output_containerAppEnvName }} \
-            --target-port 80 \
-            --ingress external \
-            --env-vars CorsAllowedHosts=*
+    # - name: Deploy to Container App
+    #   uses: Azure/CLI@v1
+    #   continue-on-error: false
+    #   with:
+    #     inlineScript: |
+    #       az config set extension.use_dynamic_install=yes_without_prompt
+    #       az containerapp create \
+    #         --name ${{ needs.deploy_infrastructure.outputs.output_containerAppName }} \
+    #         --resource-group ${{ env.Azure_Resource_GroupName }} \
+    #         --image ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }} \
+    #         --registry-server ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io \
+    #         --registry-username ${{ steps.GetKVACRValues.outputs.acrusername }} \
+    #         --registry-password ${{ steps.GetKVACRValues.outputs.acruserpassword }} \
+    #         --environment ${{ needs.deploy_infrastructure.outputs.output_containerAppEnvName }} \
+    #         --target-port 80 \
+    #         --ingress external \
+    #         --env-vars CorsAllowedHosts=*
+
+    # - name: Deploy to Container App
+    #   uses: Azure/CLI@v1
+    #   continue-on-error: false
+    #   with:
+    #     inlineScript: |
+    #       az config set extension.use_dynamic_install=yes_without_prompt
+    #       az containerapp create \
+    #         --name ${{ needs.deploy_infrastructure.outputs.output_containerAppName }} \
+    #         --resource-group ${{ env.Azure_Resource_GroupName }} \
+    #         --image ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }} \
+    #         --registry-server ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io \
+    #         --registry-username ${{ steps.GetKVACRValues.outputs.acrusername }} \
+    #         --registry-password ${{ steps.GetKVACRValues.outputs.acruserpassword }} \
+    #         --environment ${{ needs.deploy_infrastructure.outputs.output_containerAppEnvName }} \
+    #         --target-port 80 \
+    #         --ingress external \
+    #         --env-vars CorsAllowedHosts=*
 
     # Lock Resource Group
     - name: Ensure Resource Group is Locked
