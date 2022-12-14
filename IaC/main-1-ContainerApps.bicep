@@ -180,8 +180,8 @@ resource roleAssignmentForContainerApp 'Microsoft.Authorization/roleAssignments@
   scope: containerApp
   properties: {
     principalType: 'ServicePrincipal'
-    //principalId: reference(containerApp.id, containerApp.apiVersion, 'Full').identity.principalId
-    principalId: reference(containerApp.id, '2022-06-01-preview', 'Full').identity.principalId
+    principalId: reference(containerApp.id, containerApp.apiVersion, 'Full').identity.principalId
+    //principalId: reference(containerApp.id, '2022-06-01-preview', 'Full').identity.principalId
     roleDefinitionId: ACRPull_roleAssignmentRoleDefinitionId
   }
 }
