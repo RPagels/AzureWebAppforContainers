@@ -174,7 +174,7 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
 // Azure built-in roles - https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles
 var ACRPull_roleAssignmentRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
 
-resource existing_ContainerApp 'Microsoft.AppConfiguration/configurationStores@2022-05-01' existing = {
+resource existing_ContainerApp 'Microsoft.App/containerApps@2022-06-01-preview' existing = {
   name: containerAppName
 }
 
