@@ -175,13 +175,13 @@ resource containerApp 'Microsoft.App/containerApps@2022-06-01-preview' = {
 var ACRPull_roleAssignmentRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '7f951dda-4ed3-4680-a7ca-43fe172d538d')
 
 // Add role assignment to Container App
-resource roleAssignmentForAppConfig 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+resource roleAssignmentForContainerApp 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid(containerApp.id, ACRPull_roleAssignmentRoleDefinitionId)
   scope: containerApp
   properties: {
     principalType: 'ServicePrincipal'
     //principalId: reference(containerApp.id, containerApp.apiVersion, 'Full').identity.principalId
-    principalId: reference(containerApp.id, '2022-06-01-preview', 'Full').identity.principalId
+    principalId: reference(containerApp.id, '2020-12-01', 'Full').identity.principalId
     roleDefinitionId: ACRPull_roleAssignmentRoleDefinitionId
   }
 }
