@@ -139,6 +139,18 @@ module configsettingsmod './main-1-ConfigSettings.bicep' = {
    ]
  }
 
+// Add Role Assignments
+module roleAssignments './main-1-RoleAssignments.bicep' = {
+  name: 'addRoleAssignments'
+  params: {
+    containerAppName: containerAppName
+    principalId: ADOServiceprincipalObjectId
+  }
+  dependsOn:  [
+    configsettingsmod
+  ]
+}
+
 // Output Params used for IaC deployment in pipeline
 output out_webSiteName string = webSiteName
 output out_keyvaultName string = keyvaultName
