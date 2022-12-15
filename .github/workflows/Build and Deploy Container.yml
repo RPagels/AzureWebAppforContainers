@@ -344,13 +344,13 @@ jobs:
     #         --image ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }} \
 
     # Deploy an existing container image to Container Apps
-    # - name: Deploy existing container image to Container App
-    #   uses: azure/container-apps-deploy-action@v0
-    #   with:
-    #     acrName: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}
-    #     containerAppName: ${{ needs.deploy_infrastructure.outputs.output_containerAppName }}
-    #     resourceGroup: ${{ env.Azure_Resource_GroupName }}
-    #     imageToDeploy: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }}
+    - name: Deploy existing container image to Container App
+      uses: azure/container-apps-deploy-action@v0
+      with:
+        acrName: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}
+        containerAppName: ${{ needs.deploy_infrastructure.outputs.output_containerAppName }}
+        resourceGroup: ${{ env.Azure_Resource_GroupName }}
+        imageToDeploy: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:${{ github.run_number }}
 
     # Lock Resource Group
     - name: Ensure Resource Group is Locked

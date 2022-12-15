@@ -23,7 +23,7 @@ param containerImage string
 param location string //cannot use resourceGroup().location since it's not available in most of regions
 
 @description('Specifies the container port.')
-param targetPort int = 80
+param targetPort int = 8080
 
 @description('Number of CPU cores the container can use. Can be with a maximum of two decimals.')
 param cpuCore string = '0.5'
