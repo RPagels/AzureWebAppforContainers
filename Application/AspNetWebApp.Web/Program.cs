@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using AspNetWebApp.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHealthChecks()
     .AddCheck<MyAppHealthCheck>("Sample");
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
+
+// Setup Toast Notifications
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 6; config.IsDismissable = false; config.Position = NotyfPosition.BottomRight; });
 
 var app = builder.Build();
 
@@ -33,5 +38,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// Add Toast Notifications middleware to the Pipeline which in turn captures all your notifications
+app.UseNotyf();
 
 app.Run();
