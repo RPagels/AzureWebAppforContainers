@@ -29,14 +29,15 @@ namespace AspNetWebApp.Web.Controllers
 
         public IActionResult Notifications()
         {
-            _notyf.Error("Some Error Message");
-            _notyf.Warning("Some Warning Message");
-            _notyf.Information("Some Information Notification - closes in 4 seconds.", 4);
+            string mycount = "4";
+
+            _notyf.Error("Some Error Message - " + mycount);
+            _notyf.Warning("Some Warning Message - Closes in 6 secs", 6);
+            _notyf.Information("Some Information Message - closes in 4 seconds.", 4);
             _notyf.Custom("Custom Notification - closes in 6 seconds.", 6, "whitesmoke", "fa fa-gear");
             _notyf.Custom("Custom Notification - closes in 8 seconds.", 8, "#B600FF", "fa fa-home");
             _notyf.Custom("Custom Notification for info - closes in 10 seconds.", 10, "#Ff0000", "fa fa-info");
-            _notyf.Custom("Custom Notification - closes in 12 seconds.", 12, "#B600FF", "fa fa-warning");
-
+            _notyf.Custom("Custom Notification - closes in 12 seconds. " + mycount, 12, "#B600FF", "fa fa-warning");
             return View();
 
         }

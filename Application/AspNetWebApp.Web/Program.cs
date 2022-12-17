@@ -13,7 +13,7 @@ builder.Services.AddHealthChecks()
 builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 // Setup Toast Notifications
-builder.Services.AddNotyf(config => { config.DurationInSeconds = 6; config.IsDismissable = false; config.Position = NotyfPosition.BottomRight; });
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 6; config.IsDismissable = true; config.Position = NotyfPosition.BottomRight; });
 
 var app = builder.Build();
 
