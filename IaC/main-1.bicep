@@ -113,6 +113,7 @@ module keyvaultmod './main-1-KeyVault.bicep' = {
 param ADOServiceprincipalObjectId string = '653d7ee3-5006-4eb0-be45-4bf1ace4d232'
 
 // Application Id of Service Principal for your Alias. i.e. "RPagels".
+// az ad user show --id rpagels@microsoft.com
 param AzObjectIdEmailAlias string = 'b6be0700-1fda-4f88-bf20-1aa508a91f73'
 
  // Create Configuration Entries

@@ -43,12 +43,12 @@ Follow the steps below for detailed instructions on how to run this in your envi
   ## Step 3 - Edit Bicep file
   - Open /IaC/**main-1.bicep**
   - Edit these two lines with the object id and application id
-    - // Object Id of Service Principal (i.e. **AzureWebAppForContainers**) 
-   param ADOServiceprincipalObjectId string = '**{Object ID}**'
+    - // Object Id of Service Principal (i.e. **AzureWebAppForContainers**)
+      - param ADOServiceprincipalObjectId string = '**Object ID**'
+         - Note: use **az ad sp list --display-name** "**REPLACE WITH RG NAME**_SP_FullAccess" to find **id**. ()
     - // Application Id of Service Principal for your email alias. (i.e. **"RPagels"**).
-   param AzObjectIdEmailAlias string = '**{Application ID}**'
-  > Todo! insert a PS command to display Object ID)
-  > Todo! insert a PS command to display App ID)
+      - param AzObjectIdEmailAlias string = '**Application ID**'
+        - Note: use **az ad user show --id rpagels@microsoft.com** to find **id**.
 
 ## Step 4 - Set Deployment Credentials - Create a GitHub Secret
 
