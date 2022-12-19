@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.12.40.16777",
-      "templateHash": "13643005435016823507"
+      "version": "0.13.1.58284",
+      "templateHash": "9176859014903108670"
     }
   },
   "parameters": {
@@ -37,7 +37,7 @@
       "type": "string",
       "defaultValue": "653d7ee3-5006-4eb0-be45-4bf1ace4d232"
     },
-    "AzObjectIdPagels": {
+    "AzObjectIdEmailAlias": {
       "type": "string",
       "defaultValue": "b6be0700-1fda-4f88-bf20-1aa508a91f73"
     }
@@ -54,7 +54,7 @@
     "containerAppName": "[format('ca-{0}', uniqueString(resourceGroup().id))]",
     "containerAppEnvName": "[format('cae-{0}', uniqueString(resourceGroup().id))]",
     "containerAppLogAnalyticsName": "[format('calog-{0}', uniqueString(resourceGroup().id))]",
-    "containerImage": "mcr.microsoft.com/azuredocs/containerapps-helloworld:latest",
+    "containerImage": "nginx:latest",
     "defaultTags": {
       "App": "Web App for Containers",
       "CostCenter": "[parameters('costCenter')]",
@@ -95,8 +95,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "5029855023310949492"
+              "version": "0.13.1.58284",
+              "templateHash": "10612539823414760904"
             }
           },
           "parameters": {
@@ -250,8 +250,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "9067101634117130649"
+              "version": "0.13.1.58284",
+              "templateHash": "15128873337548809904"
             }
           },
           "parameters": {
@@ -459,8 +459,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "6347807411797510672"
+              "version": "0.13.1.58284",
+              "templateHash": "13083270430881951623"
             }
           },
           "parameters": {
@@ -545,8 +545,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "6829185194613098990"
+              "version": "0.13.1.58284",
+              "templateHash": "4138014258858594265"
             }
           },
           "parameters": {
@@ -658,8 +658,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "13526050501000536437"
+              "version": "0.13.1.58284",
+              "templateHash": "2321211481037593104"
             }
           },
           "parameters": {
@@ -702,7 +702,7 @@
             },
             "targetPort": {
               "type": "int",
-              "defaultValue": 80,
+              "defaultValue": 8080,
               "metadata": {
                 "description": "Specifies the container port."
               }
@@ -781,6 +781,9 @@
               "name": "[parameters('containerAppName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('defaultTags')]",
+              "identity": {
+                "type": "SystemAssigned"
+              },
               "properties": {
                 "managedEnvironmentId": "[resourceId('Microsoft.App/managedEnvironments', parameters('containerAppEnvName'))]",
                 "configuration": {
@@ -902,8 +905,8 @@
           "ADOServiceprincipalObjectId": {
             "value": "[parameters('ADOServiceprincipalObjectId')]"
           },
-          "AzObjectIdPagels": {
-            "value": "[parameters('AzObjectIdPagels')]"
+          "AzObjectIdEmailAlias": {
+            "value": "[parameters('AzObjectIdEmailAlias')]"
           },
           "ACRUrl": {
             "value": "[reference(resourceId('Microsoft.Resources/deployments', variables('containerregistryName')), '2020-10-01').outputs.acrLoginServer.value]"
@@ -927,8 +930,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "12310194038559053028"
+              "version": "0.13.1.58284",
+              "templateHash": "11487276628421178107"
             }
           },
           "parameters": {
@@ -950,7 +953,7 @@
             "ADOServiceprincipalObjectId": {
               "type": "secureString"
             },
-            "AzObjectIdPagels": {
+            "AzObjectIdEmailAlias": {
               "type": "secureString"
             },
             "KV_acr_usernameName": {
@@ -1005,7 +1008,7 @@
                 },
                 {
                   "tenantId": "[parameters('tenant')]",
-                  "objectId": "[parameters('AzObjectIdPagels')]",
+                  "objectId": "[parameters('AzObjectIdEmailAlias')]",
                   "permissions": {
                     "keys": [
                       "get",
@@ -1104,8 +1107,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.12.40.16777",
-              "templateHash": "12888626182057396007"
+              "version": "0.13.1.58284",
+              "templateHash": "7466628687695668252"
             }
           },
           "parameters": {

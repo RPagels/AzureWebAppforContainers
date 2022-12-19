@@ -109,11 +109,11 @@ module keyvaultmod './main-1-KeyVault.bicep' = {
 // This is NOT supported. Look up Object ID for Service Principal
 //var randyPagelsRoleDefinitionId = subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'rpagels@microsoft.com') // b6be0700-1fda-4f88-bf20-1aa508a91f73
 
-// Object Id of Service Principal "AzureWebAppforContainerApps_FullAccess"
+// Object Id of Service Principal i.e. "AzureWebAppforContainerApps_FullAccess"
 param ADOServiceprincipalObjectId string = '653d7ee3-5006-4eb0-be45-4bf1ace4d232'
 
-// Application Id of Service Principal "RPagels" Alias.
-param AzObjectIdPagels string = 'b6be0700-1fda-4f88-bf20-1aa508a91f73'
+// Application Id of Service Principal for your Alias. i.e. "RPagels".
+param AzObjectIdEmailAlias string = 'b6be0700-1fda-4f88-bf20-1aa508a91f73'
 
  // Create Configuration Entries
 module configsettingsmod './main-1-ConfigSettings.bicep' = {
@@ -126,7 +126,7 @@ module configsettingsmod './main-1-ConfigSettings.bicep' = {
     appInsightsInstrumentationKey: appinsightsmod.outputs.out_appInsightsInstrumentationKey
     appInsightsConnectionString: appinsightsmod.outputs.out_appInsightsConnectionString
     ADOServiceprincipalObjectId: ADOServiceprincipalObjectId
-    AzObjectIdPagels: AzObjectIdPagels
+    AzObjectIdEmailAlias: AzObjectIdEmailAlias
     ACRUrl: containerregistrymod.outputs.acrLoginServer
     KV_acr_usernameName: KV_acr_usernameName
     KV_acr_usernameNameValue: containerregistrymod.outputs.output_acr_username

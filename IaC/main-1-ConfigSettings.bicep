@@ -12,7 +12,7 @@ param appServiceprincipalId string
 @secure()
 param ADOServiceprincipalObjectId string
 @secure()
-param AzObjectIdPagels string
+param AzObjectIdEmailAlias string
 // TEMP ONLY!!!  Addes Get, List access policies to Key Value.
 // TEMP ONLY!!!  Can remove once system up an running!
 ////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ param accessPolicies array = [
   }
  {
     tenantId: tenant
-    objectId: AzObjectIdPagels
+    objectId: AzObjectIdEmailAlias
     permissions: {
       keys: [
         'get'
