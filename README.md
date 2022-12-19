@@ -53,12 +53,14 @@ Follow the steps below for detailed instructions on how to run this in your envi
 ## Step 4 - Set Deployment Credentials - Create a GitHub Secret
 
   - Copy the following to notepad.
-    > {
-        "clientId": "GUID",
-        "clientSecret": "GUID",
-        "subscriptionId": "GUID",
-        "tenantId": "GUID"
-      }
+```
+  {
+    "clientId": "GUID",
+    "clientSecret": "GUID",
+    "subscriptionId": "GUID",
+    "tenantId": "GUID"
+  }
+```
 
   - Replace the placeholders with your information from above step **Step 2 - Create a Service Principal**.
       - clientId
@@ -76,12 +78,16 @@ Follow the steps below for detailed instructions on how to run this in your envi
     - Click on **New resository secret**.
     - In the name box, enter **AZURE_CREDENTIALS**.
     - For Secret, enter the JSON output from notepad.
-      > {
-        "clientId": "**YOURGUID**",
-        "clientSecret": "**YOURGUID**",
-        "subscriptionId": "**YOURGUID**",
-        "tenantId": "**YOURGUID**"
-      }
+
+```
+        {
+          "clientId": "**YOURGUID**",
+          "clientSecret": "**YOURGUID**",
+          "subscriptionId": "**YOURGUID**",
+          "tenantId": "**YOURGUID**"
+        }
+```
+
     - Click **Add secret**
 
   > Todo! Verify these steps are correct.
