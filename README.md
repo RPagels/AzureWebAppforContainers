@@ -7,24 +7,25 @@ Azure Container Apps enables you to run microservices and containerized applicat
 [![Build and Deploy Container](https://github.com/RPagels/AzureWebAppforContainers/actions/workflows/Build%20and%20Deploy%20Container.yml/badge.svg)](https://github.com/RPagels/AzureWebAppforContainers/actions/workflows/Build%20and%20Deploy%20Container.yml)
 
 ## Setup Steps
-Follow the steps below for detailed instructions on how to run this in your environment.  The Build & Deployment Pipeline version below below is intended for a quick setup and requires some familiarity with Azure and pipelines, the **EASY BUTTON**.
+Follow the steps below for detailed instructions on how to run this in your environment.  The Build & Deployment Pipeline version below is intended for a quick setup and requires some familiarity with Azure and pipelines, you know ... the **EASY BUTTON**.
 
 ## Step 1 - Setup Resource Group
   - Login to the Azure Portal.
-  - Create a resource group (pick a region which allows Containers.
-     - At the time of this edit the allowed regions were:
-        - northcentralusstage
-        - eastus
-        - eastus2
-        - northeurope
-        - canadacentral
-      - Copy the the Resource Group name and Region to notepad for use later.
+  - Create a resource group (pick a region which allows Containers. At the time of this edit the allowed regions were:
+      - northcentralusstage
+      - eastus
+      - eastus2
+      - northeurope
+      - canadacentral
+  - Copy the the Resource Group name and Region to notepad for use later.
     > Todo! insert a PS command or web url to display the regions in real-time)
 
 ## Step 2 - Create a Service Principal
   ### Option A
+  #### Create a service principal with access to Resource Group
   - Open the Cloud Shell and run this PowerShell command:
-  - >az ad sp create-for-rbac --name "{REPLACE WITH RG NAME}_SP_FullAccess" --role owner --scopes /subscriptions/{REPLACE 
+  - > az ad sp create-for-rbac --name "**REPLACE WITH RG NAME**_SP_FullAccess" --role owner --scopes /subscriptions/**REPLACE WITH YOUR SUBSCRIPTION ID**/resourceGroups/**REPLACE WITH YOUR RESOURCE GROUP NAME**
+
   - Copy the JSON output to notepad for use later.
 
   ### Option B
@@ -35,6 +36,8 @@ Follow the steps below for detailed instructions on how to run this in your envi
   - Copy the **Client ID** because you will need it in later steps.
   - Copy the **Tenant ID** because you will need it in later steps.
   - Copy the **Object ID** because you will need it in later steps.
+  > Todo! Setup RBAC to resource group for service principal.
+
   > Todo! Verify these steps are correct.
 
   ## Step 3 - Edit Bicep file
@@ -51,23 +54,39 @@ Follow the steps below for detailed instructions on how to run this in your envi
 
   - Copy the following to notepad.
     > {
-        "clientId": "<GUID>",
-        "clientSecret": "<GUID>",
-        "subscriptionId": "<GUID>",
-        "tenantId": "<GUID>"
+        "clientId": "GUID",
+        "clientSecret": "GUID",
+        "subscriptionId": "GUID",
+        "tenantId": "GUID"
       }
 
-  - Replace the placeholders with your information from above steps **Set Deployment Credentials**:
-    - Subscription ID
-    - Resource Group name
-    - App name. The output is 
+  - Replace the placeholders with your information from above step **Step 2 - Create a Service Principal**.
+      - clientId
+      - clientSecret
+      - subscriptionId
+      - tenantId
+  - Copy the JSON output to notepad for use later.
   - Create the secret
-    - use the name AZURE_CREDENTIALS
+    - Login to GitHub.
+    - Navigate to Repo [**AzureWebAppforContainers**](https://github.com/RPagels/AzureWebAppforContainers)
+    - Click on **Code** | Code - **GitHub CLI**
+      - i.e. **gh repo clone RPagels/AzureWebAppforContainers**
+    - Navigate to cloned repo.
+    - Click **Settings** | **Secrets** | **Actions**.
+    - Click on **New resository secret**.
+    - In the name box, enter **AZURE_CREDENTIALS**.
+    - For Secret, enter the JSON output from notepad.
+      > {
+        "clientId": "**YOURGUID**",
+        "clientSecret": "**YOURGUID**",
+        "subscriptionId": "**YOURGUID**",
+        "tenantId": "**YOURGUID**"
+      }
+    - Click **Add secret**
 
-
-  To Do - generate the GitHub JSON
+  > Todo! Verify these steps are correct.
   
-> This is a JSON object with the role assignment credentials that provide access to your Azure Resource Group to be used later.
+> This is a JSON object with the role assignment credentials that provide access to your Azure Resource Group used by GitHub pipelines.
 
 ## Step 4 - Set Build & Deployment Pipeline
 
