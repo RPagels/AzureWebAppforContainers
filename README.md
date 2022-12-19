@@ -88,7 +88,7 @@ Follow the steps below for detailed instructions on how to run this in your envi
         }
 ```
 
-    - Click **Add secret**
+  - Click **Add secret**
 
   > Todo! Verify these steps are correct.
   
