@@ -372,7 +372,7 @@ jobs:
   ################################################################
   # Stage: Build and deploy to Container Apps
   ################################################################            
-  build_deploy_to_containerapp:
+  deploy_to_containerapp:
     name: Build > Container App
     needs: [deploy_infrastructure]
     environment:
