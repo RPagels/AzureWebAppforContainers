@@ -372,7 +372,7 @@ jobs:
   ################################################################
   # Stage: Build and deploy to Container Apps
   ################################################################            
-  deploy_to_containerapp:
+  build_deploy_to_containerapp:
     name: Build > Container App
     needs: [deploy_infrastructure]
     environment:
@@ -427,12 +427,12 @@ jobs:
 
     # PREVIEW - https://github.com/marketplace/actions/azure-container-apps-build-and-deploy
     - name: Build and deploy Container App
-    uses: azure/container-apps-deploy-action@v0
-    with:
-      appSourcePath: ${{ github.workspace }}/Application/AspNetWebApp.Web
-      acrName: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}
-      containerAppName: ${{ needs.deploy_infrastructure.outputs.output_containerAppName }}
-      resourceGroup: ${{ env.Azure_Resource_GroupName }}
+      uses: azure/container-apps-deploy-action@v0
+      with:
+        appSourcePath: ${{ github.workspace }}/Application/AspNetWebApp.Web
+        acrName: ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}
+        containerAppName: ${{ needs.deploy_infrastructure.outputs.output_containerAppName }}
+        resourceGroup: ${{ env.Azure_Resource_GroupName }}
 
     # Lock Resource Group
     - name: Ensure Resource Group is Locked
