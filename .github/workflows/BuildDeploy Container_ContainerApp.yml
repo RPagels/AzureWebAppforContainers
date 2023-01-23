@@ -1,4 +1,4 @@
-name: Build and Deploy Container
+name: BuildDeploy Container_ContainerApp
 on:
   # push:
   #   branches:
