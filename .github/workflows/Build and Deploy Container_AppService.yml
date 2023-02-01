@@ -1,4 +1,4 @@
-name: Build and Deploy Container
+name: Build and Deploy Container App Service
 on:
   # push:
   #   branches:
