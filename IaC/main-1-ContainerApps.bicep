@@ -65,7 +65,7 @@ resource logAnalytics 'Microsoft.OperationalInsights/workspaces@2022-10-01' = {
   })
 }
 
-resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-03-01' = {
+resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: containerAppEnvName
   location: location
   tags: defaultTags
@@ -82,7 +82,7 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-03-01' = {
 
 // Create Container App
 // Note: revisionSuffix MUST BE unique per deployment.
-resource containerApp 'Microsoft.App/containerApps@2022-03-01' = {
+resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
   name: containerAppName
   location: location
   tags: defaultTags

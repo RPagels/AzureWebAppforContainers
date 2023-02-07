@@ -13,7 +13,7 @@ param acrAdminUserEnabled bool = true
 param acrSku string = 'Basic'
 
 // azure container registry
-resource containerregistry 'Microsoft.ContainerRegistry/registries@2022-02-01-preview' = {
+resource containerregistry 'Microsoft.ContainerRegistry/registries@2023-01-01-preview' = {
   name: containerregistryName
   location: location
   identity: {
