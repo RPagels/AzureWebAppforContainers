@@ -39,7 +39,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
 
     # Check if Resource Group Exists
     - name: Ensure Resource Group Exists
@@ -116,7 +116,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
 
     # Get ACR name/ACR password from Key Vault
     - name: 'Get Key Vault values'
@@ -203,7 +203,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
 
     - name: DEBUG ONLY Display Output Variables
       run: |
@@ -261,7 +261,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
 
     - name: 'Get Key Vault values'
       id: GetKVACRValues
@@ -386,7 +386,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
 
     - name: 'Get Key Vault values'
       id: GetKVACRValues
