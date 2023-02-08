@@ -158,6 +158,7 @@ module roleAssignments './main-1-RoleAssignments.bicep' = {
   }
   dependsOn:  [
     configsettingsmod
+    containerappmod
   ]
 }
 
