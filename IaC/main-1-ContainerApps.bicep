@@ -126,34 +126,34 @@ resource containerApp 'Microsoft.App/containerApps@2022-10-01' = {
             cpu: json(cpuCore)
             memory: '${memorySize}Gi'
           }
-          probes: [
-            {
-              type: 'liveness'
-              httpGet: {
-              path: '/health'
-              port: 8080
-              }
-            initialDelaySeconds: 7
-            periodSeconds: 3
-            }
-            {
-              type: 'readiness'
-              httpGet: {
-              port: 8081
-              }
-            initialDelaySeconds: 10
-            periodSeconds: 3
-            }
-            {
-              type: 'startup'
-              httpGet: {
-              path: '/startup'
-              port: 8080
-              }
-            initialDelaySeconds: 3
-            periodSeconds: 3
-            }
-          ]
+          // probes: [
+          //   {
+          //     type: 'liveness'
+          //     httpGet: {
+          //     path: '/health'
+          //     port: 8080
+          //     }
+          //   initialDelaySeconds: 7
+          //   periodSeconds: 3
+          //   }
+          //   {
+          //     type: 'readiness'
+          //     httpGet: {
+          //     port: 8081
+          //     }
+          //   initialDelaySeconds: 10
+          //   periodSeconds: 3
+          //   }
+          //   {
+          //     type: 'startup'
+          //     httpGet: {
+          //     path: '/startup'
+          //     port: 8080
+          //     }
+          //   initialDelaySeconds: 3
+          //   periodSeconds: 3
+          //   }
+          // ]
         }
       ]
       scale: {
