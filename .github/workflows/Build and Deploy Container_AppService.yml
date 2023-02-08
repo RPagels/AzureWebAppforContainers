@@ -15,7 +15,8 @@ env:
   Azure_Resource_GroupLocation: 'eastus2'
   CONFIGURATION: Release
   WORKING_DIRECTORY: .
-  
+  AZURE_CREDENTIALS_MCAPS: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
+
 jobs:
 
   ################################################################
@@ -39,7 +40,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
+        creds: ${{ env.AZURE_CREDENTIALS_MCAPS }}
 
     # Check if Resource Group Exists
     - name: Ensure Resource Group Exists
@@ -116,7 +117,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
+        creds: ${{ env.AZURE_CREDENTIALS_MCAPS }}
 
     # Get ACR name/ACR password from Key Vault
     - name: 'Get Key Vault values'
@@ -203,7 +204,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS_MCAPS }}
+        creds: ${{ env.AZURE_CREDENTIALS_MCAPS }}
 
     - name: DEBUG ONLY Display Output Variables
       run: |
