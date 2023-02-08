@@ -112,12 +112,17 @@ module keyvaultmod './main-1-KeyVault.bicep' = {
 // Object Id of Service Principal i.e. "AzureWebAppforContainerApps_FullAccess"
 //param ADOServiceprincipalObjectId string = '653d7ee3-5006-4eb0-be45-4bf1ace4d232'
 
-// ServicePrincipal_FullSubscriptionAccess
-param ADOServiceprincipalObjectId string = '7155581e-1bf2-45e7-9343-d10e93b3f1dd'
+// ServicePrincipal_FullSubscriptionAccess in "MCAPS-Hybrid-REQ-49911-2022-RPagels"
+// Enterpise Application = d589e43b-c408-431e-bb55-73232bab26a3
+// App Registration = 7155581e-1bf2-45e7-9343-d10e93b3f1dd
+param ADOServiceprincipalObjectId string = 'd589e43b-c408-431e-bb55-73232bab26a3'
 
 // Object Id of Service Principal for your Alias. i.e. "RPagels".
-// az ad user show --id rpagels@microsoft.com
+// az ad user show --id rpagels_microsoft.com#EXT#@fdpo.onmicrosoft.com in "MCAPS-Hybrid-REQ-49911-2022-RPagels"
 //param AzObjectIdEmailAlias string = 'b6be0700-1fda-4f88-bf20-1aa508a91f73'
+
+// Enterpise Application = d589e43b-c408-431e-bb55-73232bab26a3
+// App Registration = 7155581e-1bf2-45e7-9343-d10e93b3f1dd
 param AzObjectIdEmailAlias string = '197b8610-80f8-4317-b9c4-06e5b3246e87'
 
  // Create Configuration Entries
