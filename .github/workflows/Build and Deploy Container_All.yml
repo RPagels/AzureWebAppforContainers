@@ -117,7 +117,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ env.AZURE_CREDENTIALS_MCAPS }}
 
     # Get ACR name/ACR password from Key Vault
     - name: 'Get Key Vault values'
@@ -262,7 +262,7 @@ jobs:
     - name: Azure authentication
       uses: azure/login@v1
       with:
-        creds: ${{ env.AZURE_CREDENTIALS_CAPS }}
+        creds: ${{ env.AZURE_CREDENTIALS_MCAPS }}
 
     - name: 'Get Key Vault values'
       id: GetKVACRValues
