@@ -70,7 +70,7 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-10-01' = {
   location: location
   tags: defaultTags
   sku: {
-    name: 'S1'
+    name: 'Consumption'
   }
   properties: {
     appLogsConfiguration: {
