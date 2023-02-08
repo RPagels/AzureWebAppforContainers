@@ -4,8 +4,8 @@
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.13.1.58284",
-      "templateHash": "9176859014903108670"
+      "version": "0.14.6.61914",
+      "templateHash": "14878168337377670577"
     }
   },
   "parameters": {
@@ -35,11 +35,11 @@
     },
     "ADOServiceprincipalObjectId": {
       "type": "string",
-      "defaultValue": "653d7ee3-5006-4eb0-be45-4bf1ace4d232"
+      "defaultValue": "d589e43b-c408-431e-bb55-73232bab26a3"
     },
     "AzObjectIdEmailAlias": {
       "type": "string",
-      "defaultValue": "b6be0700-1fda-4f88-bf20-1aa508a91f73"
+      "defaultValue": "197b8610-80f8-4317-b9c4-06e5b3246e87"
     }
   },
   "variables": {
@@ -95,8 +95,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "10612539823414760904"
+              "version": "0.14.6.61914",
+              "templateHash": "11296595391716574339"
             }
           },
           "parameters": {
@@ -250,14 +250,14 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "15128873337548809904"
+              "version": "0.14.6.61914",
+              "templateHash": "5463059994861244224"
             }
           },
           "parameters": {
             "skuName": {
               "type": "string",
-              "defaultValue": "S1"
+              "defaultValue": "B1"
             },
             "location": {
               "type": "string"
@@ -355,7 +355,7 @@
                 },
                 "ValidationRules": {
                   "ExpectedHttpStatusCode": 200,
-                  "IgnoreHttpsStatusCode": false,
+                  "IgnoreHttpStatusCode": false,
                   "ContentValidation": null,
                   "SSLCheck": true,
                   "SSLCertRemainingLifetimeCheck": 7
@@ -405,7 +405,7 @@
                 },
                 "ValidationRules": {
                   "ExpectedHttpStatusCode": 200,
-                  "IgnoreHttpsStatusCode": false,
+                  "IgnoreHttpStatusCode": false,
                   "ContentValidation": null,
                   "SSLCheck": true,
                   "SSLCertRemainingLifetimeCheck": 7
@@ -459,8 +459,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "13083270430881951623"
+              "version": "0.14.6.61914",
+              "templateHash": "8129587283334781148"
             }
           },
           "parameters": {
@@ -545,8 +545,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "4138014258858594265"
+              "version": "0.14.6.61914",
+              "templateHash": "10662959688313174063"
             }
           },
           "parameters": {
@@ -579,7 +579,7 @@
           "resources": [
             {
               "type": "Microsoft.ContainerRegistry/registries",
-              "apiVersion": "2022-02-01-preview",
+              "apiVersion": "2023-01-01-preview",
               "name": "[parameters('containerregistryName')]",
               "location": "[parameters('location')]",
               "identity": {
@@ -600,15 +600,15 @@
           "outputs": {
             "acrLoginServer": {
               "type": "string",
-              "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries', parameters('containerregistryName')), '2022-02-01-preview').loginServer]"
+              "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries', parameters('containerregistryName')), '2023-01-01-preview').loginServer]"
             },
             "output_acr_username": {
               "type": "string",
-              "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', parameters('containerregistryName')), '2022-02-01-preview').username]"
+              "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', parameters('containerregistryName')), '2023-01-01-preview').username]"
             },
             "output_acr_pass": {
               "type": "string",
-              "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', parameters('containerregistryName')), '2022-02-01-preview').passwords[0].value]"
+              "value": "[listCredentials(resourceId('Microsoft.ContainerRegistry/registries', parameters('containerregistryName')), '2023-01-01-preview').passwords[0].value]"
             }
           }
         }
@@ -658,8 +658,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "2321211481037593104"
+              "version": "0.14.6.61914",
+              "templateHash": "2144954281671837238"
             }
           },
           "parameters": {
@@ -679,7 +679,7 @@
               "type": "string"
             },
             "containerregistryNameCredentials": {
-              "type": "secureString"
+              "type": "securestring"
             },
             "defaultTags": {
               "type": "object"
@@ -758,7 +758,7 @@
             },
             {
               "type": "Microsoft.App/managedEnvironments",
-              "apiVersion": "2022-06-01-preview",
+              "apiVersion": "2022-10-01",
               "name": "[parameters('containerAppEnvName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('defaultTags')]",
@@ -777,7 +777,7 @@
             },
             {
               "type": "Microsoft.App/containerApps",
-              "apiVersion": "2022-06-01-preview",
+              "apiVersion": "2022-10-01",
               "name": "[parameters('containerAppName')]",
               "location": "[parameters('location')]",
               "tags": "[parameters('defaultTags')]",
@@ -820,35 +820,7 @@
                       "resources": {
                         "cpu": "[json(parameters('cpuCore'))]",
                         "memory": "[format('{0}Gi', parameters('memorySize'))]"
-                      },
-                      "probes": [
-                        {
-                          "type": "liveness",
-                          "httpGet": {
-                            "path": "/health",
-                            "port": 8080
-                          },
-                          "initialDelaySeconds": 7,
-                          "periodSeconds": 3
-                        },
-                        {
-                          "type": "readiness",
-                          "httpGet": {
-                            "port": 8081
-                          },
-                          "initialDelaySeconds": 10,
-                          "periodSeconds": 3
-                        },
-                        {
-                          "type": "startup",
-                          "httpGet": {
-                            "path": "/startup",
-                            "port": 8080
-                          },
-                          "initialDelaySeconds": 3,
-                          "periodSeconds": 3
-                        }
-                      ]
+                      }
                     }
                   ],
                   "scale": {
@@ -865,7 +837,7 @@
           "outputs": {
             "containerAppFQDN": {
               "type": "string",
-              "value": "[reference(resourceId('Microsoft.App/containerApps', parameters('containerAppName')), '2022-06-01-preview').configuration.ingress.fqdn]"
+              "value": "[reference(resourceId('Microsoft.App/containerApps', parameters('containerAppName')), '2022-10-01').configuration.ingress.fqdn]"
             }
           }
         }
@@ -930,8 +902,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "11487276628421178107"
+              "version": "0.14.6.61914",
+              "templateHash": "1958052916107461845"
             }
           },
           "parameters": {
@@ -948,25 +920,25 @@
               "type": "string"
             },
             "appServiceprincipalId": {
-              "type": "secureString"
+              "type": "securestring"
             },
             "ADOServiceprincipalObjectId": {
-              "type": "secureString"
+              "type": "securestring"
             },
             "AzObjectIdEmailAlias": {
-              "type": "secureString"
+              "type": "securestring"
             },
             "KV_acr_usernameName": {
               "type": "string"
             },
             "KV_acr_usernameNameValue": {
-              "type": "secureString"
+              "type": "securestring"
             },
             "KV_acr_passName": {
               "type": "string"
             },
             "KV_acr_passNameValue": {
-              "type": "secureString"
+              "type": "securestring"
             },
             "appInsightsInstrumentationKey": {
               "type": "string"
@@ -1107,8 +1079,8 @@
           "metadata": {
             "_generator": {
               "name": "bicep",
-              "version": "0.13.1.58284",
-              "templateHash": "7466628687695668252"
+              "version": "0.14.6.61914",
+              "templateHash": "6225964974544513401"
             }
           },
           "parameters": {
@@ -1141,7 +1113,8 @@
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Resources/deployments', 'configSettings')]"
+        "[resourceId('Microsoft.Resources/deployments', 'configSettings')]",
+        "[resourceId('Microsoft.Resources/deployments', variables('containerAppName'))]"
       ]
     }
   ],

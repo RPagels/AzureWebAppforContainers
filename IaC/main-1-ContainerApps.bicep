@@ -69,6 +69,9 @@ resource containerAppEnv 'Microsoft.App/managedEnvironments@2022-10-01' = {
   name: containerAppEnvName
   location: location
   tags: defaultTags
+  sku: {
+    name: 'S1'
+  }
   properties: {
     appLogsConfiguration: {
       destination: 'log-analytics'
