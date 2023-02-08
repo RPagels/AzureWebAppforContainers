@@ -99,7 +99,7 @@ resource standardWebTestPageHome  'Microsoft.Insights/webtests@2022-06-15' = {
     }
     ValidationRules: {
       ExpectedHttpStatusCode: 200
-      IgnoreHttpsStatusCode: false
+      IgnoreHttpStatusCode: false
       ContentValidation: null
       SSLCheck: true
       SSLCertRemainingLifetimeCheck: 7
@@ -145,7 +145,7 @@ resource standardWebTestPagePrivacy  'Microsoft.Insights/webtests@2022-06-15' = 
     }
     ValidationRules: {
       ExpectedHttpStatusCode: 200
-      IgnoreHttpsStatusCode: false
+      IgnoreHttpStatusCode: false
       ContentValidation: null
       SSLCheck: true
       SSLCertRemainingLifetimeCheck: 7
