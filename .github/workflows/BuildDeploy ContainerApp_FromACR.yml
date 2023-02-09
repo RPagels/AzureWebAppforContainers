@@ -1,4 +1,4 @@
-name: BuildDeploy Container ContainerAppFromACR
+name: BuildDeploy ContainerApp FromACR
 on:
   # push:
   #   branches:
