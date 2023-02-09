@@ -154,21 +154,6 @@ jobs:
         docker build "$GITHUB_WORKSPACE/${{env.DOCKERFILEPATH}}" -f  "${{env.DOCKERFILEPATH}}/Dockerfile" -t ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:v${{ github.run_number }}
         docker push ${{ needs.deploy_infrastructure.outputs.output_containerregistryName }}.azurecr.io/${{ needs.deploy_infrastructure.outputs.output_containerName }}:v${{ github.run_number }}
 
-    # - name: Log in to container registry
-    #   uses: docker/login-action@v1
-    #   with:
-    #     registry: ${{ env.registry-name }}.azurecr.io
-    #     username: ${{ env.ACR_USERNAME }}
-    #     password: ${{ env.ACR_PASSWORD }}
-
-    # - name: Build and push container image to registry
-    #   uses: docker/build-push-action@v2
-    #   with:
-    #     push: true
-    #     tags: ${{ env.registry-name }}.azurecr.io/${{ env.image-name }}:${{ env.version }}.${{ github.run_number }}
-    #     file: ./Dockerfile
-    #     context: ./
-
     # Lock Resource Group
     - name: Ensure Resource Group is Locked
       uses: Azure/CLI@v1
